@@ -1,4 +1,4 @@
-import { A, L } from "ts-toolbelt";
+import { L } from "ts-toolbelt";
 
 import { IsObject, IsArray } from "./extends";
 
@@ -28,9 +28,11 @@ export type DeepMergeUnsafe<A, B> = IsObject<A> extends true
     : B
   : IsArray<A> extends true
   ? IsArray<B> extends true
-    ? B extends L.List
-      ? // 🔧 TOIMPROVE: Not cast here
-        L.Concat<A.Cast<A, L.List>, B>
+    ? A extends L.List
+      ? B extends L.List
+        ? // 🔧 TOIMPROVE: Not cast here
+          L.Concat<A, B>
+        : never
       : never
     : B
   : B;
@@ -61,9 +63,11 @@ export type DeepMergeSafe<A, B> = IsObject<A> extends true
     : B
   : IsArray<A> extends true
   ? IsArray<B> extends true
-    ? B extends any[]
-      ? // 🔧 TOIMPROVE: Not cast here
-        L.Concat<A.Cast<A, L.List>, B>
+    ? A extends L.List
+      ? B extends L.List
+        ? // 🔧 TOIMPROVE: Not cast here
+          L.Concat<A, B>
+        : never
       : never
     : B
   : B;

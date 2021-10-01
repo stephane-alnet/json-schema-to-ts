@@ -1,64 +1,63 @@
-import { Object, Any, Never, Union, Error } from "../meta-types";
-import { IsObject } from "../utils";
+import { M } from "ts-algebra";
+
+import { JSONSchema7 } from "definitions";
 
 import { ParseSchema } from ".";
 
-export type ParseObjectSchema<S> = "properties" extends keyof S
-  ? Object<
-      {
+export type ParseObjectSchema<
+  S extends JSONSchema7,
+  // Don't know why but not specifying "extends any" leads to a bug
+  $V extends any = "properties" extends keyof S
+    ? {
         [key in keyof S["properties"]]: ParseSchema<S["properties"][key]>;
-      },
-      GetRequired<S>,
-      "additionalProperties" extends keyof S
-        ? S["additionalProperties"] extends false
-          ? false
-          : true
-        : true,
-      GetOpenProps<S>
-    >
-  : Object<{}, GetRequired<S>, true, GetOpenProps<S>>;
+      }
+    : {},
+  V extends Record<string, M.Type> = $V extends Record<string, M.Type>
+    ? $V
+    : { error: M.Error<""> },
+  R extends string = GetRequired<S>,
+  $O = ParseOpenProps<S>,
+  O extends M.Type = $O extends M.Type ? $O : M.Error<"">
+> = M.Object<V, R, O>;
 
-type GetRequired<S> = S extends { required: ReadonlyArray<string> }
+type GetRequired<S extends JSONSchema7> = S extends {
+  required: ReadonlyArray<string>;
+}
   ? S["required"][number]
   : never;
 
-type GetOpenProps<S> = "additionalProperties" extends keyof S
-  ? "patternProperties" extends keyof S
-    ? AdditionalAndPatternProps<
+type ParseOpenProps<S extends JSONSchema7> = S extends {
+  additionalProperties: Exclude<JSONSchema7["additionalProperties"], undefined>;
+}
+  ? S extends {
+      patternProperties: Exclude<JSONSchema7["patternProperties"], undefined>;
+    }
+    ? // @ts-expect-error
+      AdditionalAndPatternProps<
         S["additionalProperties"],
         S["patternProperties"]
       >
-    : AdditionalProps<S["additionalProperties"]>
-  : "patternProperties" extends keyof S
-  ? PatternProps<S["patternProperties"]>
-  : Any;
+    : ParseSchema<S["additionalProperties"]>
+  : S extends { patternProperties: JSONSchema7["patternProperties"] }
+  ? // @ts-expect-error
+    PatternProps<S["patternProperties"]>
+  : M.Any;
 
-type AdditionalProps<A> = A extends false
-  ? Never
-  : A extends true
-  ? Any
-  : IsObject<A> extends true
-  ? ParseSchema<A>
-  : Error<'Invalid value in "additionalProperties" property'>;
-
-type PatternProps<P> = {
-  type: "union";
-  values: {
+type PatternProps<
+  P extends Record<string, boolean | JSONSchema7>,
+  $R = {
     [key in keyof P]: ParseSchema<P[key]>;
-  }[keyof P];
-};
+  }[keyof P],
+  R extends M.Type = $R extends M.Type ? $R : M.Error<"">
+> = M.Union<R>;
 
-type AdditionalAndPatternProps<A, P> = A extends boolean
-  ? Union<
-      {
-        [key in keyof P]: ParseSchema<P[key]>;
-      }[keyof P]
-    >
-  : IsObject<A> extends true
-  ? Union<
-      | ParseSchema<A>
-      | {
-          [key in keyof P]: ParseSchema<P[key]>;
-        }[keyof P]
-    >
-  : never;
+type AdditionalAndPatternProps<
+  A extends boolean | JSONSchema7,
+  P extends Record<string, boolean | JSONSchema7>,
+  $R1 = ParseSchema<A>,
+  R1 extends M.Type = $R1 extends M.Type ? $R1 : M.Error<"">,
+  $R2 = {
+    [key in keyof P]: ParseSchema<P[key]>;
+  }[keyof P],
+  R2 extends M.Type = $R2 extends M.Type ? $R2 : M.Error<"">
+> = M.Union<R1 | R2>;
