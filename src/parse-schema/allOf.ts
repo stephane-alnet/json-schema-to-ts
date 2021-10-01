@@ -21,11 +21,9 @@ export type ParseAllOfSchema<S extends JSONSchema7> = S extends {
 
 type RecurseOnAllOfSchema<S extends JSONSchema7[], P extends JSONSchema7, R> = {
   stop: R;
-  // @ts-expect-error
   continue: RecurseOnAllOfSchema<
     L.Tail<S>,
     P,
-    // @ts-expect-error
     IntersectMergedSubSchemaAndResult<L.Head<S>, P, R>
   >;
 }[S extends [any, ...L.List] ? "continue" : "stop"];
@@ -33,10 +31,8 @@ type RecurseOnAllOfSchema<S extends JSONSchema7[], P extends JSONSchema7, R> = {
 type IntersectMergedSubSchemaAndResult<
   S extends JSONSchema7,
   P extends JSONSchema7,
-  $R,
-  R extends M.Type = $R extends M.Type ? $R : M.Error<"">,
+  R,
   $M = MergeSubSchema<Omit<P, "allOf">, S>,
   M extends JSONSchema7 = $M extends JSONSchema7 ? $M : {},
-  $T = ParseSchema<M>,
-  T extends M.Type = $T extends M.Type ? $T : M.Error<"">
-> = M.Intersect<T, R>;
+  T = ParseSchema<M>
+> = M.$Intersect<T, R>;
