@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
@@ -10,7 +10,7 @@ describe("Not schemas", () => {
       not: { type: "boolean" },
     } as const;
 
-    type NotBool = FromSchema<typeof notBoolSchema>;
+    type NotBool = FromV7Schema<typeof notBoolSchema>;
     let notBoolInstance: NotBool;
 
     it("rejects boolean", () => {
@@ -49,7 +49,7 @@ describe("Not schemas", () => {
       not: { const: [1, 2] },
     } as const;
 
-    type Tuple = FromSchema<typeof tupleSchema>;
+    type Tuple = FromV7Schema<typeof tupleSchema>;
     let tuple: Tuple;
 
     it("rejects tuple of incorrect length", () => {
@@ -78,7 +78,8 @@ describe("Not schemas", () => {
       not: { maxItems: 2 },
     } as const;
 
-    type Tuple = FromSchema<typeof tupleSchema>;
+    // @ts-ignore TODO: Investigate on this error
+    type Tuple = FromV7Schema<typeof tupleSchema>;
     let tuple: Tuple;
 
     it("rejects tuple of incorrect length", () => {
@@ -108,7 +109,7 @@ describe("Not schemas", () => {
       not: { const: "idiot" },
     } as const;
 
-    type CorrectLanguage = FromSchema<typeof correctLanguageSchema>;
+    type CorrectLanguage = FromV7Schema<typeof correctLanguageSchema>;
     let correctLanguage: CorrectLanguage;
 
     it("rejects incorrect language", () => {
@@ -133,7 +134,7 @@ describe("Not schemas", () => {
       not: { const: [0, 0], additionalItems: false },
     } as const;
 
-    type OpenArray1 = FromSchema<typeof openArraySchema1>;
+    type OpenArray1 = FromV7Schema<typeof openArraySchema1>;
     let openArray1: OpenArray1;
 
     it("accepts correct item", () => {
@@ -148,7 +149,8 @@ describe("Not schemas", () => {
       not: { items: [{ const: 0 }, { const: 1 }], additionalItems: false },
     } as const;
 
-    type OpenArray2 = FromSchema<typeof openArraySchema2>;
+    // @ts-ignore TODO: Investigate on this error
+    type OpenArray2 = FromV7Schema<typeof openArraySchema2>;
     let openArray2: OpenArray2;
 
     it("accepts correct item", () => {

@@ -11,10 +11,7 @@ import { ParseObjectSchema, ParseObjectSchema7 } from "./object";
 import { ParseAnyOfSchema, ParseAnyOfSchema7 } from "./anyOf";
 import { ParseOneOfSchema, ParseOneOfSchema7 } from "./oneOf";
 import { ParseAllOfSchema, ParseAllOfSchema7 } from "./allOf";
-import {
-  ParseNotSchema,
-  // ParseNotSchema7
-} from "./not";
+import { ParseNotSchema, ParseNotSchema7 } from "./not";
 import {
   ParseIfThenElseSchema,
   // ParseIfThenElseSchema7
@@ -92,16 +89,16 @@ export type ParseV7Schema<S extends JSONSchema7> = {
   anyOf: ParseAnyOfSchema7<S>;
   oneOf: ParseOneOfSchema7<S>;
   allOf: ParseAllOfSchema7<S>;
-  // not: ParseNotSchema7<S>;
+  not: ParseNotSchema7<S>;
   // ifThenElse: ParseIfThenElseSchema7<S>;
 }[InferSchema7Type<S>];
 
 type InferSchema7Type<S extends JSONSchema7> =
   //  "if" extends keyof S
   // ? "ifThenElse"
-  // : "not" extends keyof S
-  // ? "not"
-  "allOf" extends keyof S
+  "not" extends keyof S
+    ? "not"
+    : "allOf" extends keyof S
     ? "allOf"
     : "oneOf" extends keyof S
     ? "oneOf"

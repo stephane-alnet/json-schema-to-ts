@@ -623,7 +623,7 @@ describe("AllOf schemas", () => {
         ],
       } as const;
 
-      // @ts-ignore
+      // @ts-ignore TODO: Investigate on this error
       type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 
