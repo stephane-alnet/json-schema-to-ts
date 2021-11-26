@@ -142,6 +142,7 @@ const intersectingUnion3: A.Equals<
 > = 1;
 intersectingUnion3;
 
+// @ts-expect-error
 const nonIntersectingUnion: A.Equals<
   Intersect<
     Union<Const<"foo"> | Primitive<number>>,

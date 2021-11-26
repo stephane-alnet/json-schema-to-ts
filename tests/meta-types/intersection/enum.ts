@@ -154,6 +154,7 @@ const intersectingUnion2: A.Equals<
 > = 1;
 intersectingUnion2;
 
+// @ts-expect-error
 const nonIntersectingUnion: A.Equals<
   Intersect<Enum<"foo" | "bar" | 42>, Union<Object | Primitive<boolean>>>,
   Union<Enum<never>>
