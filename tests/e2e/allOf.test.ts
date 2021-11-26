@@ -623,6 +623,7 @@ describe("AllOf schemas", () => {
         ],
       } as const;
 
+      // @ts-ignore
       type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 

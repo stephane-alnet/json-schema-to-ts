@@ -21,9 +21,9 @@ export type MergeSubSchema<P, C> = Merge<
 export type RemoveInvalidAdditionalItems7<S extends JSONSchema7> = S extends {
   items: JSONSchema7 | JSONSchema7[];
 }
-  ? "additionalItems" extends keyof S
+  ? S extends { additionalItems: boolean | JSONSchema7 }
     ? S
-    : Omit<S, "additionalItems"> & { additionalItems: true }
+    : S & { additionalItems: true }
   : Omit<S, "additionalItems">;
 
 type EmptySchema = { properties: {}; additionalProperties: true; required: [] };
