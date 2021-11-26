@@ -23,11 +23,11 @@ export type JSONSchema7 = Omit<
 > & {
   const?: unknown;
   enum?: unknown;
-  items?: boolean | JSONSchema7 | (boolean | JSONSchema7)[];
+  items?: JSONSchema7 | JSONSchema7[];
   additionalItems?: boolean | JSONSchema7;
   contains?: JSONSchema7;
-  properties?: Record<string, boolean | JSONSchema7>;
-  patternProperties?: Record<string, boolean | JSONSchema7>;
+  properties?: Record<string, JSONSchema7>;
+  patternProperties?: Record<string, JSONSchema7>;
   additionalProperties?: boolean | JSONSchema7;
   dependencies?: {
     [key: string]: boolean | JSONSchema7 | string[];

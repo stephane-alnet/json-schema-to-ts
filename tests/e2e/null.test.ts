@@ -1,13 +1,13 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
 describe("Null schema", () => {
   const nullSchema = { type: "null" } as const;
 
-  type Null = FromSchema<typeof nullSchema>;
+  type Null = FromV7Schema<typeof nullSchema>;
   let nullInstance: Null;
 
   it("accepts null const", () => {

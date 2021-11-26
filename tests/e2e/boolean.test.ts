@@ -1,13 +1,13 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
 describe("Boolean schemas", () => {
   const booleanSchema = { type: "boolean" } as const;
 
-  type Boolean = FromSchema<typeof booleanSchema>;
+  type Boolean = FromV7Schema<typeof booleanSchema>;
   let booleanInst: Boolean;
 
   it("accepts boolean value", () => {

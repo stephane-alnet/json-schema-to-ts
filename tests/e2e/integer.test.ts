@@ -1,13 +1,13 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
 describe("Integer schemas", () => {
   const integerSchema = { type: "integer" } as const;
 
-  type Number = FromSchema<typeof integerSchema>;
+  type Number = FromV7Schema<typeof integerSchema>;
   let integerInstance: Number;
 
   it("accepts any integer value", () => {

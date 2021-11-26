@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
@@ -10,7 +10,7 @@ describe("Mixed types schemas", () => {
       type: ["null", "boolean", "integer"],
     } as const;
 
-    type Simple = FromSchema<typeof simpleTypesSchema>;
+    type Simple = FromV7Schema<typeof simpleTypesSchema>;
     let simpleInstance: Simple;
 
     it("accepts null value", () => {
@@ -47,7 +47,7 @@ describe("Mixed types schemas", () => {
       items: { type: "string" },
     } as const;
 
-    type Complex = FromSchema<typeof complexTypesSchema>;
+    type Complex = FromV7Schema<typeof complexTypesSchema>;
     let complexInstance: Complex;
 
     it("accepts number value", () => {
@@ -90,7 +90,7 @@ describe("Mixed types schemas", () => {
       required: ["name"],
     } as const;
 
-    type UberComplex = FromSchema<typeof uberComplexTypesSchema>;
+    type UberComplex = FromV7Schema<typeof uberComplexTypesSchema>;
     let uberComplexInstance: UberComplex;
 
     it("accepts object with required & valid properties", () => {

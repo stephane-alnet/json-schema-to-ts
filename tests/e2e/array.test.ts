@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
@@ -9,7 +9,7 @@ describe("Array schemas", () => {
     describe("Any array", () => {
       const noItemsSchema = { type: "array" } as const;
 
-      type UnknownArray = FromSchema<typeof noItemsSchema>;
+      type UnknownArray = FromV7Schema<typeof noItemsSchema>;
       let anyArrayInstance: UnknownArray;
 
       it("accepts any array", () => {
@@ -39,7 +39,7 @@ describe("Array schemas", () => {
         items: { type: "string" },
       } as const;
 
-      type StringArray = FromSchema<typeof stringArraySchema>;
+      type StringArray = FromV7Schema<typeof stringArraySchema>;
       let stringArrayInstance: StringArray;
 
       it("accepts string arrays", () => {
@@ -72,7 +72,7 @@ describe("Array schemas", () => {
         },
       } as const;
 
-      type FruitArray = FromSchema<typeof fruitArraySchema>;
+      type FruitArray = FromV7Schema<typeof fruitArraySchema>;
       let fruitArrayInstance: FruitArray;
 
       it("accepts array of valid objects", () => {
@@ -119,7 +119,7 @@ describe("Array schemas", () => {
     } as const;
 
     describe("Base", () => {
-      type Recipe = FromSchema<typeof recipeSchema>;
+      type Recipe = FromV7Schema<typeof recipeSchema>;
       let recipeInstance: Recipe;
 
       it("accepts valid tuple", () => {
@@ -167,7 +167,7 @@ describe("Array schemas", () => {
         additionalItems: { type: "boolean" },
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema2>;
+      type Recipe = FromV7Schema<typeof recipeSchema2>;
       let recipeInstance: Recipe;
 
       it("accepts valid tuples", () => {
@@ -195,7 +195,7 @@ describe("Array schemas", () => {
         additionalItems: false,
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema3>;
+      type Recipe = FromV7Schema<typeof recipeSchema3>;
       let recipeInstance: Recipe;
 
       it("accepts valid tuple", () => {
@@ -217,7 +217,7 @@ describe("Array schemas", () => {
         additionalItems: true,
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema4>;
+      type Recipe = FromV7Schema<typeof recipeSchema4>;
       let recipeInstance: Recipe;
 
       it("accepts tuples with > 2 items", () => {
@@ -250,7 +250,7 @@ describe("Array schemas", () => {
         additionalItems: { type: "boolean" },
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema5>;
+      type Recipe = FromV7Schema<typeof recipeSchema5>;
       let recipeInstance: Recipe;
 
       it("accepts tuples with 2 or 3 items", () => {
@@ -286,7 +286,7 @@ describe("Array schemas", () => {
         additionalItems: { type: "boolean" },
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema6>;
+      type Recipe = FromV7Schema<typeof recipeSchema6>;
       let recipeInstance: Recipe;
 
       it("accepts valid tuples", () => {
@@ -331,7 +331,7 @@ describe("Array schemas", () => {
         additionalItems: false,
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema7>;
+      type Recipe = FromV7Schema<typeof recipeSchema7>;
       let recipeInstance: Recipe;
 
       it("accepts tuples with > 2 items", () => {
@@ -361,7 +361,7 @@ describe("Array schemas", () => {
         maxItems: 2,
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema8>;
+      type Recipe = FromV7Schema<typeof recipeSchema8>;
       let recipeInstance: Recipe;
 
       it("accepts tuples with < 2 items", () => {
@@ -388,7 +388,7 @@ describe("Array schemas", () => {
         minItems: 4,
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema9>;
+      type Recipe = FromV7Schema<typeof recipeSchema9>;
       let recipeInstance: Recipe;
 
       it("accepts tuples with > 4 items", () => {
@@ -427,7 +427,7 @@ describe("Array schemas", () => {
         additionalItems: false,
       } as const;
 
-      type Recipe = FromSchema<typeof recipeSchema10>;
+      type Recipe = FromV7Schema<typeof recipeSchema10>;
       let recipeInstance: Recipe;
 
       it("rejects any tuple", () => {

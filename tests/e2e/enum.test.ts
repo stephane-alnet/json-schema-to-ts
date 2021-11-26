@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
@@ -8,7 +8,7 @@ describe("Enum schemas", () => {
   describe("Empty enum", () => {
     const emptyEnumSchema = { enum: [] } as const;
 
-    type Never = FromSchema<typeof emptyEnumSchema>;
+    type Never = FromV7Schema<typeof emptyEnumSchema>;
     let neverInstance: Never;
 
     it("rejects any value", () => {
@@ -43,7 +43,7 @@ describe("Enum schemas", () => {
       enum: [null, true, 12, "tomatoe", { name: "dogo" }, ["foo", "bar"]],
     } as const;
 
-    type Mixed = FromSchema<typeof mixedEnumSchema>;
+    type Mixed = FromV7Schema<typeof mixedEnumSchema>;
     let mixedInstance: Mixed;
 
     it("accepts any listed value", () => {
@@ -95,7 +95,7 @@ describe("Enum schemas", () => {
       enum: ["apples", "tomatoes", "bananas", true],
     } as const;
 
-    type Fruit = FromSchema<typeof fruitEnumSchema>;
+    type Fruit = FromV7Schema<typeof fruitEnumSchema>;
     let fruitInstance: Fruit;
 
     it("accepts valid string", () => {
@@ -126,7 +126,7 @@ describe("Enum schemas", () => {
       enum: [13, 42, { not: "a number" }],
     } as const;
 
-    type Number = FromSchema<typeof numberEnumSchema>;
+    type Number = FromV7Schema<typeof numberEnumSchema>;
     let numberInstance: Number;
 
     it("accepts valid number", () => {
@@ -154,7 +154,7 @@ describe("Enum schemas", () => {
       ],
     } as const;
 
-    type Recipe = FromSchema<typeof recipeEnumSchema>;
+    type Recipe = FromV7Schema<typeof recipeEnumSchema>;
     let recipe: Recipe;
 
     it("accepts valid tuples", () => {
@@ -191,7 +191,7 @@ describe("Enum schemas", () => {
       ],
     } as const;
 
-    type Cat = FromSchema<typeof catEnumSchema>;
+    type Cat = FromV7Schema<typeof catEnumSchema>;
     let catInstance: Cat;
 
     it("accepts valid objects", () => {
@@ -231,7 +231,7 @@ describe("Enum schemas", () => {
         enum: [Food.Pizza, Food.Tacos],
       } as const;
 
-      type PizzaTacos = FromSchema<typeof pizzaTacosSchema>;
+      type PizzaTacos = FromV7Schema<typeof pizzaTacosSchema>;
       let pizzaOrTacos: PizzaTacos;
 
       pizzaOrTacos = Food.Pizza;
@@ -250,7 +250,7 @@ describe("Enum schemas", () => {
         enum: Object.values(Food),
       };
 
-      type FoodType = FromSchema<typeof foodSchema>;
+      type FoodType = FromV7Schema<typeof foodSchema>;
       let food: FoodType;
 
       food = Food.Pizza;
@@ -281,7 +281,7 @@ describe("Enum schemas", () => {
         enum: Object.values(Food),
       } as const;
 
-      type FoodType = FromSchema<typeof foodSchema>;
+      type FoodType = FromV7Schema<typeof foodSchema>;
       let food: FoodType;
 
       food = Food.Pizza;

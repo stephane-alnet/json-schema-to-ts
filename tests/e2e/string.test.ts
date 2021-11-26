@@ -1,13 +1,13 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
 describe("String schemas", () => {
   const stringSchema = { type: "string" } as const;
 
-  type String = FromSchema<typeof stringSchema>;
+  type String = FromV7Schema<typeof stringSchema>;
   let stringInstance: String;
 
   it("accepts any string value", () => {

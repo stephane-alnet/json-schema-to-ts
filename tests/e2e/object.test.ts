@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
@@ -8,7 +8,7 @@ describe("Object schemas", () => {
   describe("Any object", () => {
     const petSchema = { type: "object" } as const;
 
-    type Pet = FromSchema<typeof petSchema>;
+    type Pet = FromV7Schema<typeof petSchema>;
     let petInstance: Pet;
 
     it("accepts empty object", () => {
@@ -34,7 +34,7 @@ describe("Object schemas", () => {
       additionalProperties: { type: "boolean" },
     } as const;
 
-    type Set = FromSchema<typeof setSchema>;
+    type Set = FromV7Schema<typeof setSchema>;
     let setInstance: Set;
 
     it("accepts object with boolean values", () => {
@@ -59,7 +59,7 @@ describe("Object schemas", () => {
       additionalProperties: false,
     } as const;
 
-    type StrOrNumObj = FromSchema<typeof strOrNumObjSchema>;
+    type StrOrNumObj = FromV7Schema<typeof strOrNumObjSchema>;
     let objInstance: StrOrNumObj;
 
     it("accepts object with str or number values", () => {
@@ -84,7 +84,7 @@ describe("Object schemas", () => {
       },
     } as const;
 
-    type BoolStrOrNumObj = FromSchema<typeof boolStrOrNumObjSchema>;
+    type BoolStrOrNumObj = FromV7Schema<typeof boolStrOrNumObjSchema>;
     let objInstance: BoolStrOrNumObj;
 
     it("accepts object with str, number or boolean values", () => {
@@ -106,7 +106,7 @@ describe("Object schemas", () => {
       additionalProperties: false,
     } as const;
 
-    type Cat = FromSchema<typeof catSchema>;
+    type Cat = FromV7Schema<typeof catSchema>;
     let catInstance: Cat;
 
     it("accepts empty object", () => {
@@ -156,7 +156,7 @@ describe("Object schemas", () => {
       additionalProperties: false,
     } as const;
 
-    type Dog = FromSchema<typeof dogSchema>;
+    type Dog = FromV7Schema<typeof dogSchema>;
     let dogInstance: Dog;
 
     it("accepts object with required & valid properties", () => {
@@ -216,7 +216,7 @@ describe("Object schemas", () => {
       required: ["number", "streetName", "streetType", "direction"],
     } as const;
 
-    type Address = FromSchema<typeof addressSchema>;
+    type Address = FromV7Schema<typeof addressSchema>;
     let addressInstance: Address;
 
     it("accepts object with required & valid properties", () => {
@@ -266,7 +266,7 @@ describe("Object schemas", () => {
       additionalProperties: { type: "string" },
     } as const;
 
-    type Address = FromSchema<typeof addressSchema>;
+    type Address = FromV7Schema<typeof addressSchema>;
     let addressInstance: Address;
 
     it("accepts object with required & valid properties", () => {
@@ -312,7 +312,7 @@ describe("Object schemas", () => {
       additionalProperties: false,
     } as const;
 
-    type Address = FromSchema<typeof addressSchema>;
+    type Address = FromV7Schema<typeof addressSchema>;
     let addressInstance: Address;
 
     it("rejects any value", () => {

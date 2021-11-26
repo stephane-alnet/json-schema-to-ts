@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
@@ -15,10 +15,10 @@ describe("Const schemas", () => {
       const: null,
     } as const;
 
-    type Null1 = FromSchema<typeof null1Schema>;
+    type Null1 = FromV7Schema<typeof null1Schema>;
     let null1Instance: Null1;
 
-    type Null2 = FromSchema<typeof null2Schema>;
+    type Null2 = FromV7Schema<typeof null2Schema>;
     let null2Instance: Null2;
 
     it("accepts null", () => {
@@ -45,7 +45,7 @@ describe("Const schemas", () => {
         const: null,
       } as const;
 
-      type Never = FromSchema<typeof invalidSchema>;
+      type Never = FromV7Schema<typeof invalidSchema>;
       let neverInstance: Never;
 
       // @ts-expect-error
@@ -81,7 +81,7 @@ describe("Boolean", () => {
       const: true,
     } as const;
 
-    type True = FromSchema<typeof trueSchema>;
+    type True = FromV7Schema<typeof trueSchema>;
     let trueInstance: True;
 
     trueInstance = true;
@@ -102,7 +102,7 @@ describe("Boolean", () => {
       const: false,
     } as const;
 
-    type False = FromSchema<typeof falseSchema>;
+    type False = FromV7Schema<typeof falseSchema>;
     let falseInstance: False;
 
     falseInstance = false;
@@ -123,7 +123,7 @@ describe("String", () => {
     const: "apples",
   } as const;
 
-  type Apples = FromSchema<typeof applesSchema>;
+  type Apples = FromV7Schema<typeof applesSchema>;
   let applesInstance: Apples;
 
   it("accepts 'apples'", () => {
@@ -148,7 +148,7 @@ describe("String", () => {
     const: "tomatoes",
   } as const;
 
-  type Tomatoes = FromSchema<typeof tomatoesSchema>;
+  type Tomatoes = FromV7Schema<typeof tomatoesSchema>;
   let tomatoesInstance: Tomatoes;
 
   it("accepts 'tomatoes' (with added type)", () => {
@@ -168,7 +168,7 @@ describe("Integer", () => {
     const: 42,
   } as const;
 
-  type FortyTwo = FromSchema<typeof fortyTwoSchema>;
+  type FortyTwo = FromV7Schema<typeof fortyTwoSchema>;
   let fortyTwoInstance: FortyTwo;
 
   it("accepts 42", () => {
@@ -194,7 +194,7 @@ describe("Object", () => {
     const: { name: "Dogo", age: 13, hobbies: ["barking", "urinating"] },
   } as const;
 
-  type Dogo = FromSchema<typeof dogoSchema>;
+  type Dogo = FromV7Schema<typeof dogoSchema>;
   let dogoInstance: Dogo;
 
   it("accepts correct object", () => {
@@ -226,7 +226,7 @@ describe("Array", () => {
     const: pizzaRecipe,
   } as const;
 
-  type PizzaRecipe = FromSchema<typeof pizzaRecipeSchema>;
+  type PizzaRecipe = FromV7Schema<typeof pizzaRecipeSchema>;
   let pizzaRecipeInstance: PizzaRecipe;
 
   it("accepts valid array", () => {
