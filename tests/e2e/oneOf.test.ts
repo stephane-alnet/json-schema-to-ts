@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 
-import { FromSchema } from "index";
+import { FromV7Schema } from "index";
 
 var ajv = new Ajv();
 
@@ -10,7 +10,7 @@ describe("OneOf schemas", () => {
       oneOf: [{ type: "boolean" }, { type: "string" }],
     } as const;
 
-    type StringBoolOrNumber = FromSchema<typeof oneOfSchema>;
+    type StringBoolOrNumber = FromV7Schema<typeof oneOfSchema>;
     let boolOrStringInstance: StringBoolOrNumber;
 
     it("accepts boolean or string value", () => {
@@ -34,7 +34,7 @@ describe("OneOf schemas", () => {
       oneOf: [{ type: "boolean" }, { type: "string" }, { type: "number" }],
     } as const;
 
-    type Enum = FromSchema<typeof anyOfSchema>;
+    type Enum = FromV7Schema<typeof anyOfSchema>;
     let enumInstance: Enum;
 
     it("accepts string values or 42", () => {
@@ -71,7 +71,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it("accepts objects matching only #1", () => {
@@ -117,7 +117,7 @@ describe("OneOf schemas", () => {
         oneOf: [{ additionalProperties: { type: "boolean" } }],
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it("rejects object not matching child", () => {
@@ -147,7 +147,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it("accepts objects matching only #1", () => {
@@ -184,7 +184,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it("accepts objects matching only #1", () => {
@@ -225,7 +225,7 @@ describe("OneOf schemas", () => {
         required: ["bool"],
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it('rejects object matching child schema as parent requires "bool" prop', () => {
@@ -255,7 +255,7 @@ describe("OneOf schemas", () => {
         required: ["bool"],
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it("rejects non-boolean bool prop (required by parent)", () => {
@@ -280,7 +280,7 @@ describe("OneOf schemas", () => {
         additionalProperties: false,
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it("accepts valid object", () => {
@@ -310,7 +310,7 @@ describe("OneOf schemas", () => {
         additionalProperties: false,
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       objectInstance = {};
@@ -351,7 +351,7 @@ describe("OneOf schemas", () => {
         additionalProperties: false,
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it('rejects object having "str" child schema as parent is closed', () => {
@@ -387,7 +387,7 @@ describe("OneOf schemas", () => {
         additionalProperties: false,
       } as const;
 
-      type FactoredObj = FromSchema<typeof objectSchema>;
+      type FactoredObj = FromV7Schema<typeof objectSchema>;
       let objectInstance: FactoredObj;
 
       it('rejects object with "bool" property as child is closed', () => {
@@ -421,7 +421,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type Tuple = FromSchema<typeof tupleSchema>;
+      type Tuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: Tuple;
 
       it("accepts tuples matching #1", () => {
@@ -466,7 +466,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type Tuple = FromSchema<typeof tupleSchema>;
+      type Tuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: Tuple;
 
       it("accepts tuples matching #1", () => {
@@ -502,7 +502,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type Tuple = FromSchema<typeof tupleSchema>;
+      type Tuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: Tuple;
 
       it("accepts tuples matching parent and child", () => {
@@ -531,7 +531,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type Tuple = FromSchema<typeof tupleSchema>;
+      type Tuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: Tuple;
 
       it("accepts tuples matching #1", () => {
@@ -576,7 +576,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof tupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 
       it("accepts tuples matching #1", () => {
@@ -611,7 +611,7 @@ describe("OneOf schemas", () => {
         oneOf: [{ items: [{ type: "number" }], additionalItems: false }],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof tupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 
       it("rejects tuple matching child schema as parent requires 2 items", () => {
@@ -640,7 +640,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof tupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 
       it("rejects non-boolean second item (required by parent)", () => {
@@ -668,7 +668,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof tupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 
       it("accepts valid tuple", () => {
@@ -704,7 +704,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof tupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 
       it("accepts tuples matching #2", () => {
@@ -735,7 +735,7 @@ describe("OneOf schemas", () => {
         oneOf: [{ items: [{ const: "can have additionalItems" }] }],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof tupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 
       it("accepts tuples matching parent and child", () => {
@@ -765,7 +765,7 @@ describe("OneOf schemas", () => {
         ],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof factoredTupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof factoredTupleSchema>;
       let tupleInstance: FactoredTuple;
 
       it("rejects tuple having number second item as parent requires boolean", () => {
@@ -794,7 +794,7 @@ describe("OneOf schemas", () => {
         oneOf: [{ additionalItems: { type: "boolean" } }],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof tupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof tupleSchema>;
       let tupleInstance: FactoredTuple;
 
       it("accepts tuples with any additional items", () => {
@@ -813,7 +813,7 @@ describe("OneOf schemas", () => {
         oneOf: [{ minItems: 3 }, { maxItems: 1 }],
       } as const;
 
-      type FactoredTuple = FromSchema<typeof factoredTupleSchema>;
+      type FactoredTuple = FromV7Schema<typeof factoredTupleSchema>;
       let factoredTupleInstance: FactoredTuple;
 
       it("accepts tuples with <= 1 items", () => {

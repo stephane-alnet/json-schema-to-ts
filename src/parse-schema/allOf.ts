@@ -44,8 +44,9 @@ export type ParseAllOfSchema7<S extends JSONSchema7> = S extends {
         | { const: unknown }
         | { enum: unknown[] }
         | { type: JSONSchema7TypeName | JSONSchema7TypeName[] }
-        ? // TODO: anyOf, oneOf schemas
-          ParseV7Schema<Omit<S, "allOf">>
+        | { anyOf: JSONSchema7[] }
+        | { oneOf: JSONSchema7[] }
+        ? ParseV7Schema<Omit<S, "allOf">>
         : M.Any
     >
   : M.Error<'[ParseAllOfSchema7] Unable to parse schema: "allOf" keyword missing or invalid'>;

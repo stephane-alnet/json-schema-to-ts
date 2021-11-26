@@ -29,34 +29,34 @@ describe("AllOf schemas", () => {
     });
   });
 
-  // describe("Along OneOf", () => {
-  //   const appleSchema = {
-  //     oneOf: [{ const: "apples" }, { const: 42 }],
-  //     allOf: [{ type: "string" }, { enum: ["apples", "tomatoes"] }],
-  //   } as const;
+  describe("Along OneOf", () => {
+    const appleSchema = {
+      oneOf: [{ const: "apples" }, { const: 42 }],
+      allOf: [{ type: "string" }, { enum: ["apples", "tomatoes"] }],
+    } as const;
 
-  //   type Apple = FromV7Schema<typeof appleSchema>;
-  //   let appleInstance: Apple;
+    type Apple = FromV7Schema<typeof appleSchema>;
+    let appleInstance: Apple;
 
-  //   it("accepts valid string", () => {
-  //     appleInstance = "apples";
-  //     expect(ajv.validate(appleSchema, appleInstance)).toBe(true);
-  //   });
+    it("accepts valid string", () => {
+      appleInstance = "apples";
+      expect(ajv.validate(appleSchema, appleInstance)).toBe(true);
+    });
 
-  //   it("rejects other values", () => {
-  //     // @ts-expect-error
-  //     appleInstance = "tomatoes";
-  //     expect(ajv.validate(appleSchema, appleInstance)).toBe(false);
+    it("rejects other values", () => {
+      // @ts-expect-error
+      appleInstance = "tomatoes";
+      expect(ajv.validate(appleSchema, appleInstance)).toBe(false);
 
-  //     // @ts-expect-error
-  //     appleInstance = 43;
-  //     expect(ajv.validate(appleSchema, appleInstance)).toBe(false);
+      // @ts-expect-error
+      appleInstance = 43;
+      expect(ajv.validate(appleSchema, appleInstance)).toBe(false);
 
-  //     // @ts-expect-error
-  //     appleInstance = true;
-  //     expect(ajv.validate(appleSchema, appleInstance)).toBe(false);
-  //   });
-  // });
+      // @ts-expect-error
+      appleInstance = true;
+      expect(ajv.validate(appleSchema, appleInstance)).toBe(false);
+    });
+  });
 
   describe("Factored object properties", () => {
     describe("Open objects", () => {
