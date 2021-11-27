@@ -12,10 +12,7 @@ import { ParseAnyOfSchema, ParseAnyOfSchema7 } from "./anyOf";
 import { ParseOneOfSchema, ParseOneOfSchema7 } from "./oneOf";
 import { ParseAllOfSchema, ParseAllOfSchema7 } from "./allOf";
 import { ParseNotSchema, ParseNotSchema7 } from "./not";
-import {
-  ParseIfThenElseSchema,
-  // ParseIfThenElseSchema7
-} from "./ifThenElse";
+import { ParseIfThenElseSchema, ParseIfThenElseSchema7 } from "./ifThenElse";
 
 export type ParseSchema<S> = {
   any: Any;
@@ -90,38 +87,37 @@ export type ParseV7Schema<S extends JSONSchema7> = {
   oneOf: ParseOneOfSchema7<S>;
   allOf: ParseAllOfSchema7<S>;
   not: ParseNotSchema7<S>;
-  // ifThenElse: ParseIfThenElseSchema7<S>;
+  ifThenElse: ParseIfThenElseSchema7<S>;
 }[InferSchema7Type<S>];
 
-type InferSchema7Type<S extends JSONSchema7> =
-  //  "if" extends keyof S
-  // ? "ifThenElse"
-  "not" extends keyof S
-    ? "not"
-    : "allOf" extends keyof S
-    ? "allOf"
-    : "oneOf" extends keyof S
-    ? "oneOf"
-    : "anyOf" extends keyof S
-    ? "anyOf"
-    : "enum" extends keyof S
-    ? "enum"
-    : "const" extends keyof S
-    ? "const"
-    : "type" extends keyof S
-    ? S["type"] extends any[]
-      ? "mixed"
-      : S["type"] extends "null"
-      ? "null"
-      : S["type"] extends "boolean"
-      ? "boolean"
-      : S["type"] extends "integer" | "number"
-      ? "number"
-      : S["type"] extends "string"
-      ? "string"
-      : S["type"] extends "object"
-      ? "object"
-      : S["type"] extends "array"
-      ? "array"
-      : "never"
-    : "any";
+type InferSchema7Type<S extends JSONSchema7> = "if" extends keyof S
+  ? "ifThenElse"
+  : "not" extends keyof S
+  ? "not"
+  : "allOf" extends keyof S
+  ? "allOf"
+  : "oneOf" extends keyof S
+  ? "oneOf"
+  : "anyOf" extends keyof S
+  ? "anyOf"
+  : "enum" extends keyof S
+  ? "enum"
+  : "const" extends keyof S
+  ? "const"
+  : "type" extends keyof S
+  ? S["type"] extends any[]
+    ? "mixed"
+    : S["type"] extends "null"
+    ? "null"
+    : S["type"] extends "boolean"
+    ? "boolean"
+    : S["type"] extends "integer" | "number"
+    ? "number"
+    : S["type"] extends "string"
+    ? "string"
+    : S["type"] extends "object"
+    ? "object"
+    : S["type"] extends "array"
+    ? "array"
+    : "never"
+  : "any";
