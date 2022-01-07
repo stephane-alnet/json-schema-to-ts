@@ -1,5 +1,5 @@
 {
-  "name": "@stephanealnet/json-schema-to-ts",
+  "name": "json-schema-to-ts",
   "version": "2.0.0",
   "description": "Infer typescript types from your JSON schemas!",
   "main": "lib/index.d.ts",
