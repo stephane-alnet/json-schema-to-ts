@@ -1,4 +1,4 @@
-import { A, B, U } from "ts-toolbelt";
+import { A, U } from "ts-toolbelt";
 import { Get, And, Or, Not, DoesExtend, IsObject } from "../../utils";
 import { MetaType, Never, Error } from "..";
 import { Const, Value as ConstValue } from "../const";
@@ -34,7 +34,7 @@ declare type ExcludeObjects<S, E, C = CrossObjectValues<S, E>, R = Representable
 declare type CrossObjectValues<S, E> = {
     [key in keyof Values<S> | keyof Values<E> | Required<S> | Required<E>]: CrossValue<Value<S, key>, IsPossibleIn<S, key>, IsRequiredIn<S, key>, Value<E, key>, IsPossibleIn<E, key>, IsRequiredIn<E, key>>;
 };
-declare type GetUnionLength<Union> = A.Equals<Union, never> extends B.True ? "none" : A.Equals<U.Pop<Union>, never> extends B.True ? "onlyOne" : "moreThanTwo";
+declare type GetUnionLength<Union> = A.Equals<Union, never> extends 1 ? "none" : A.Equals<U.Pop<Union>, never> extends 1 ? "onlyOne" : "moreThanTwo";
 declare type IsPossibleIn<O, K> = Or<DoesExtend<K, keyof Values<O>>, IsOpen<O>>;
 declare type IsRequiredIn<O, K> = DoesExtend<K, Required<O>>;
 declare type DoesObjectSizesMatch<S, E, C> = And<IsOpen<S>, Not<IsOpen<E>>> extends true ? false : And<IsExcludedSmallEnough<C>, IsExcludedBigEnough<C>>;

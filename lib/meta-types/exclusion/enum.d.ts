@@ -1,4 +1,4 @@
-import { A, B, U } from "ts-toolbelt";
+import { A, U } from "ts-toolbelt";
 import { Get } from "../../utils";
 import { MetaType, Never, Const, Error } from "..";
 import { Enum, Values } from "../enum";
@@ -26,6 +26,6 @@ export declare type ExcludeFromEnum<Source, Excluded> = {
 }[Get<Excluded, "type"> extends MetaType ? Get<Excluded, "type"> : "errorTypeProperty"];
 declare type FilterExcluded<SourceEnum, Excluded> = Enum<RecurseOnEnumValues<Values<SourceEnum>, Excluded>>;
 declare type RecurseOnEnumValues<EnumValues, Excluded> = EnumValues extends infer EnumValue ? IsRepresentable<Exclude<Const<EnumValue>, Excluded>> extends false ? never : EnumValue : never;
-export declare type ExcludeEnum<Source, ExcludedEnum, ExcludedEnumValues = Values<ExcludedEnum>> = A.Equals<ExcludedEnumValues, never> extends B.True ? Source : ExcludeEnumValue<Source, U.Last<ExcludedEnumValues>, ExcludedEnumValues>;
+export declare type ExcludeEnum<Source, ExcludedEnum, ExcludedEnumValues = Values<ExcludedEnum>> = A.Equals<ExcludedEnumValues, never> extends 1 ? Source : ExcludeEnumValue<Source, U.Last<ExcludedEnumValues>, ExcludedEnumValues>;
 declare type ExcludeEnumValue<Source, LastEnumValue, ExcludedEnumValues> = Intersect<Exclude<Source, Const<LastEnumValue>>, Exclude<Source, Enum<U.Exclude<ExcludedEnumValues, LastEnumValue>>>>;
 export {};

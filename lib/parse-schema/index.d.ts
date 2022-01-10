@@ -9,6 +9,7 @@ import { ParseOneOfSchema } from "./oneOf";
 import { ParseAllOfSchema } from "./allOf";
 import { ParseNotSchema } from "./not";
 import { ParseIfThenElseSchema } from "./ifThenElse";
+import { ParseNullableSchema } from './nullable';
 import { Get } from '../utils/get';
 export declare type ParseSchema<S> = {
     any: Any;
@@ -27,7 +28,8 @@ export declare type ParseSchema<S> = {
     oneOf: ParseOneOfSchema<S>;
     allOf: ParseAllOfSchema<S>;
     not: ParseNotSchema<S>;
+    nullable: ParseNullableSchema<S>;
     ifThenElse: ParseIfThenElseSchema<S>;
 }[InferSchemaType<S>];
-declare type InferSchemaType<S> = S extends true | string ? "any" : S extends false ? "never" : "if" extends keyof S ? "ifThenElse" : "not" extends keyof S ? "not" : "allOf" extends keyof S ? "allOf" : "oneOf" extends keyof S ? "oneOf" : "anyOf" extends keyof S ? "anyOf" : "enum" extends keyof S ? "enum" : "const" extends keyof S ? "const" : "type" extends keyof S ? S["type"] extends any[] ? "mixed" : S["type"] extends "null" ? "null" : S["type"] extends "boolean" ? "boolean" : S["type"] extends "integer" | "number" ? "number" : S["type"] extends "string" ? ("x-brand" extends keyof S ? 'brandedString' : "string") : S["type"] extends "object" ? "object" : S["type"] extends "array" ? "array" : "never" : "any";
+declare type InferSchemaType<S> = S extends true | string ? "any" : S extends false ? "never" : "if" extends keyof S ? "ifThenElse" : "not" extends keyof S ? "not" : "allOf" extends keyof S ? "allOf" : "oneOf" extends keyof S ? "oneOf" : "anyOf" extends keyof S ? "anyOf" : "enum" extends keyof S ? "enum" : "const" extends keyof S ? "const" : Get<S, "nullable", null> extends true ? "nullable" : "type" extends keyof S ? S["type"] extends any[] ? "mixed" : S["type"] extends "null" ? "null" : S["type"] extends "boolean" ? "boolean" : S["type"] extends "integer" | "number" ? "number" : S["type"] extends "string" ? ("x-brand" extends keyof S ? 'brandedString' : "string") : S["type"] extends "object" ? "object" : S["type"] extends "array" ? "array" : "never" : "any";
 export {};

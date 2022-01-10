@@ -1,4 +1,4 @@
-import { A, B, L } from "ts-toolbelt";
+import { A, L } from "ts-toolbelt";
 import { Get, And, Not } from "../../utils";
 import { MetaType, Never, Error } from "..";
 import { Const, Value as ConstValue } from "../const";
@@ -35,11 +35,14 @@ declare type ExcludeTuples<S, E, C extends L.List = CrossTupleValues<A.Cast<Valu
 }[And<IsOpen<S>, I> extends true ? "moreThanTwo" : GetTupleLength<R>] : S;
 declare type CrossTupleValues<V1 extends L.List, V2 extends L.List, O1, O2, P1, P2, R extends L.List = []> = {
     stop: L.Reverse<R>;
-    continue1: CrossTupleValues<L.Tail<V1>, [], O1, O2, P1, P2, L.Prepend<R, CrossValue<L.Head<V1>, true, true, P2, O2, false>>>;
-    continue2: CrossTupleValues<[], L.Tail<V2>, O1, O2, P1, P2, L.Prepend<R, CrossValue<P1, O1, false, L.Head<V2>, true, true>>>;
+    continue1: CrossTupleValues<L.Tail<V1>, [
+    ], O1, O2, P1, P2, L.Prepend<R, CrossValue<L.Head<V1>, true, true, P2, O2, false>>>;
+    continue2: CrossTupleValues<[
+    ], L.Tail<V2>, O1, O2, P1, P2, L.Prepend<R, CrossValue<P1, O1, false, L.Head<V2>, true, true>>>;
     continueBoth: CrossTupleValues<L.Tail<V1>, L.Tail<V2>, O1, O2, P1, P2, L.Prepend<R, CrossValue<L.Head<V1>, true, true, L.Head<V2>, true, true>>>;
 }[V1 extends [any, ...L.List] ? V2 extends [any, ...L.List] ? "continueBoth" : "continue1" : V2 extends [any, ...L.List] ? "continue2" : "stop"];
-declare type GetTupleLength<T extends L.List, R extends L.List = L.Tail<T>> = A.Equals<T, []> extends B.True ? "none" : A.Equals<R, []> extends B.True ? "onlyOne" : "moreThanTwo";
+declare type GetTupleLength<T extends L.List, R extends L.List = L.Tail<T>> = A.Equals<T, [
+]> extends 1 ? "none" : A.Equals<R, []> extends 1 ? "onlyOne" : "moreThanTwo";
 declare type DoesTupleSizesMatch<S, E, C extends L.List> = And<IsOpen<S>, Not<IsOpen<E>>> extends true ? false : And<IsExcludedSmallEnough<C>, IsExcludedBigEnough<C>>;
 declare type IsExcludedSmallEnough<C extends L.List> = {
     stop: true;

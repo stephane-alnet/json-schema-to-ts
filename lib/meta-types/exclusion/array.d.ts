@@ -1,4 +1,4 @@
-import { A, B } from "ts-toolbelt";
+import { A } from "ts-toolbelt";
 import { Get, And, DoesExtend } from "../../utils";
 import { MetaType, Never, Const, Error } from "..";
 import { Arr, Values } from "../array";
@@ -16,7 +16,7 @@ export declare type ExcludeFromArray<Source, Excluded> = {
     primitive: Source;
     brandedPrimitive: Source;
     array: ExcludeArrs<Source, Excluded>;
-    tuple: And<DoesExtend<A.Equals<TupleValues<Excluded>, []>, B.True>, IsOpen<Excluded>> extends true ? ExcludeArrs<Source, Arr<OpenProps<Excluded>>> : Source;
+    tuple: And<DoesExtend<A.Equals<TupleValues<Excluded>, []>, 1>, IsOpen<Excluded>> extends true ? ExcludeArrs<Source, Arr<OpenProps<Excluded>>> : Source;
     object: Source;
     union: ExcludeUnion<Source, Excluded>;
     intersection: ExcludeIntersection<Source, Excluded>;
