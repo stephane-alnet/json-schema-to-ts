@@ -1,3 +1,3 @@
 import { Union, Primitive } from "../meta-types";
 import { ParseSchema } from ".";
-export declare type ParseNullableSchema<S> = Union<Primitive<null> | ParseSchema<S>>;
+export declare type ParseNullableSchema<S> = Union<Primitive<null> | ParseSchema<Omit<S, "nullable">>>;

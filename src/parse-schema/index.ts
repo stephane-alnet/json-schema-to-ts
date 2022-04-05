@@ -12,6 +12,8 @@ import { ParseNotSchema } from "./not";
 import { ParseIfThenElseSchema } from "./ifThenElse";
 import { ParseNullableSchema } from './nullable';
 
+import { Get } from '../utils/get';
+
 export type ParseSchema<S> = {
   any: Any;
   never: Never;
