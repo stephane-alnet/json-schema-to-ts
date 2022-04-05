@@ -3,6 +3,12 @@ import Ajv from "ajv";
 import { FromSchema, JSONSchema } from "index";
 
 var ajv = new Ajv();
+ajv.addKeyword({
+  keyword: 'x-brand',
+  type: 'string',
+  schemaType: 'string',
+  valid: true,
+})
 
 const guard = <S extends JSONSchema>(schema:S) => {
   return ajv.compile(schema) as (t: unknown) => t is FromSchema<S>
