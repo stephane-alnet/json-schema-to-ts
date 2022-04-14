@@ -1,5 +1,5 @@
 {
-  "name": "json-schema-to-ts",
+  "name": "@stephanealnet-signalwire/json-schema-to-ts",
   "version": "2.1.2",
   "description": "Infer typescript types from your JSON schemas!",
   "main": "lib/index.js",
@@ -15,7 +15,7 @@
   "dependencies": {
     "@types/json-schema": "^7.0.9",
     "ts-toolbelt": "^9.6.0",
-    "ts-algebra": "^1.0.1"
+    "@stephanealnet-signalwire/ts-algebra": "^1.1.1-beta.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

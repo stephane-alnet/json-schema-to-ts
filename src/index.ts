@@ -1,4 +1,4 @@
-import { M } from "ts-algebra";
+import { M } from "@stephanealnet-signalwire/ts-algebra";
 import { O } from "ts-toolbelt";
 
 import type {

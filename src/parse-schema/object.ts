@@ -1,4 +1,4 @@
-import { M } from "ts-algebra";
+import { M } from "@stephanealnet-signalwire/ts-algebra";
 
 import { JSONSchema7 } from "../definitions";
 

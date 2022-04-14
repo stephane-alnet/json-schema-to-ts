@@ -1,5 +1,5 @@
 import { JSONSchema7TypeName } from "json-schema";
-import { M } from "ts-algebra";
+import { M } from "@stephanealnet-signalwire/ts-algebra";
 
 import { JSONSchema7 } from "../definitions";
 
@@ -20,6 +20,8 @@ export type ParseSingleTypeSchema<
   ? M.Primitive<number>
   : S extends { type: "number" }
   ? M.Primitive<number>
+  : S extends { type: "string", 'x-brand': string }
+  ? M.BrandedPrimitive<string,S['x-brand']>
   : S extends { type: "string" }
   ? M.Primitive<string>
   : S extends ArraySchema

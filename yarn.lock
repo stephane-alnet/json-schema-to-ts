@@ -1389,6 +1389,13 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@stephanealnet-signalwire/ts-algebra@^1.1.1-beta.0":
+  version "1.1.1-beta.0"
+  resolved "https://registry.yarnpkg.com/@stephanealnet-signalwire/ts-algebra/-/ts-algebra-1.1.1-beta.0.tgz#710ae507ae72d9151f5d6e94b81e8054e1580232"
+  integrity sha512-hx1zYSBosiywyNgmnuCd8J90+9Ao/qCwO6KoWW2WAsb4yN6VbyYAZXS5SkN1Fx1ecLfn73ArBulCoBUSm5mFUQ==
+  dependencies:
+    ts-toolbelt "^9.6.0"
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -3548,13 +3555,6 @@ tr46@^2.1.0:
   integrity sha512-15Ih7phfcdP5YxqiB+iDtLoaTz4Nd35+IiAv0kQ5FNKHzXgdWqPoTIqEDDJmXceQt4JZk6lVPT8lnDlPpGDppw==
   dependencies:
     punycode "^2.1.1"
-
-ts-algebra@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ts-algebra/-/ts-algebra-1.0.1.tgz#fb86115d26b039c761431d7abee83040410fa59b"
-  integrity sha512-4AxsR+UtXCM808JQ+x9OoHfq7xajXbh+ODpDVjahFdkXjKY4237e6aQbQK9KXr3X97M8E7mXNYf9VkUYJ0RLpw==
-  dependencies:
-    ts-toolbelt "^9.6.0"
 
 ts-toolbelt@^9.6.0:
   version "9.6.0"
