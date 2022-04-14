@@ -1,4 +1,4 @@
-import { M } from 'https://cdn.skypack.dev/ts-algebra@^1.0.1?dts';
+import { M } from '@stephanealnet-signalwire/ts-algebra';
 import { JSONSchema7 as JSONSchema7$2, JSONSchema7TypeName } from 'https://cdn.skypack.dev/@types/json-schema@^7.0.9?dts';
 import { O, L, A } from 'https://cdn.skypack.dev/ts-toolbelt@^9.6.0?dts';
 
@@ -146,6 +146,9 @@ declare type ParseSingleTypeSchema<S extends SingleTypeSchema, O extends ParseSc
 } ? M.Primitive<number> : S extends {
     type: "number";
 } ? M.Primitive<number> : S extends {
+    type: "string";
+    'x-brand': string;
+} ? M.BrandedPrimitive<string, S['x-brand']> : S extends {
     type: "string";
 } ? M.Primitive<string> : S extends ArraySchema ? ParseArraySchema<S, O> : S extends ObjectSchema ? ParseObjectSchema<S, O> : M.Never;
 
